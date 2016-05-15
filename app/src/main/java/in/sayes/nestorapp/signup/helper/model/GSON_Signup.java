@@ -9,33 +9,36 @@ import java.util.List;
  */
 public class GSON_Signup {
 
+
     /**
+     * failure_message :
      * next_endpoint : /root_level
-     * questions : [{"input_form":{"type":"cascade_cards"},"name_var":"user_query",
-     * "options":["I am new to tax saving investment. Please start from scratch.",
-     * "I pay rent. Can you help me with HRA exemption?",
-     * "I always feel my in hand salary is way less than my CTC.",
-     * "I have done investment in PPF. Can I take benefit?","I have done investment in PF. Can I get benefit?"],
-     * "select_type":"single","statements":["This is Nestor!","Welcome, select the option you care about?"]},
-     * {"input_form":{"height":1,"type":"custom_keyboard","width":1},"name_var":"user_start",
-     * "options":["Lets start to plan it"],"select_type":"single",
-     * "statements":["Cool, like everything else this too needs some planning."]}]
+     * questions : [{"input_form":{"type":"cascade_cards"},"name_var":"user_query","options":[{"value":"I am new to tax saving investment. Please start from scratch."},{"value":"I pay rent. Can you help me with HRA exemption?"},{"value":"I always feel my in hand salary is way less than my CTC."},{"value":"I have done investment in PPF. Can I take benefit?"},{"value":"I have done investment in PF. Can I get benefit?"}],"select_type":"single","statements":["This is Nestor!","Welcome, select the option you care about?"]},{"input_form":{"height":1,"type":"custom_keyboard","width":1},"name_var":"user_start","options":["Lets start to plan it"],"select_type":"single","statements":["Cool, like everything else this too needs some planning."]}]
+     * status : success
      * user_id : 9972210077
      */
 
+    private String failure_message;
     private String next_endpoint;
+    private String status;
     private String user_id;
     /**
      * input_form : {"type":"cascade_cards"}
      * name_var : user_query
-     * options : ["I am new to tax saving investment. Please start from scratch.",
-     * "I pay rent. Can you help me with HRA exemption?","I always feel my in hand salary is way less than my CTC.",
-     * "I have done investment in PPF. Can I take benefit?","I have done investment in PF. Can I get benefit?"]
+     * options : [{"value":"I am new to tax saving investment. Please start from scratch."},{"value":"I pay rent. Can you help me with HRA exemption?"},{"value":"I always feel my in hand salary is way less than my CTC."},{"value":"I have done investment in PPF. Can I take benefit?"},{"value":"I have done investment in PF. Can I get benefit?"}]
      * select_type : single
      * statements : ["This is Nestor!","Welcome, select the option you care about?"]
      */
 
     private List<QuestionsEntity> questions;
+
+    public String getFailure_message() {
+        return failure_message;
+    }
+
+    public void setFailure_message(String failure_message) {
+        this.failure_message = failure_message;
+    }
 
     public String getNext_endpoint() {
         return next_endpoint;
@@ -43,6 +46,14 @@ public class GSON_Signup {
 
     public void setNext_endpoint(String next_endpoint) {
         this.next_endpoint = next_endpoint;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUser_id() {
@@ -69,7 +80,11 @@ public class GSON_Signup {
         private InputFormEntity input_form;
         private String name_var;
         private String select_type;
-        private List<String> options;
+        /**
+         * value : I am new to tax saving investment. Please start from scratch.
+         */
+
+        private List<OptionsEntity> options;
         private List<String> statements;
 
         public InputFormEntity getInput_form() {
@@ -96,11 +111,11 @@ public class GSON_Signup {
             this.select_type = select_type;
         }
 
-        public List<String> getOptions() {
+        public List<OptionsEntity> getOptions() {
             return options;
         }
 
-        public void setOptions(List<String> options) {
+        public void setOptions(List<OptionsEntity> options) {
             this.options = options;
         }
 
@@ -121,6 +136,18 @@ public class GSON_Signup {
 
             public void setType(String type) {
                 this.type = type;
+            }
+        }
+
+        public static class OptionsEntity {
+            private String value;
+
+            public String getValue() {
+                return value;
+            }
+
+            public void setValue(String value) {
+                this.value = value;
             }
         }
     }

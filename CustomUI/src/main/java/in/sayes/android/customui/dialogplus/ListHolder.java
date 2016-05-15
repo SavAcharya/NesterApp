@@ -19,8 +19,6 @@ public class ListHolder implements HolderAdapter, AdapterView.OnItemClickListene
   private View.OnKeyListener keyListener;
   private View headerView;
   private View footerView;
-    private ViewGroup headerContainer;
-    private ViewGroup footerContainer;
 
     @Override public void addHeader(View view) {
     if (view == null) {
@@ -50,8 +48,6 @@ public class ListHolder implements HolderAdapter, AdapterView.OnItemClickListene
     View view = inflater.inflate(R.layout.dialog_list, parent, false);
     View outMostView = view.findViewById(R.id.dialogplus_outmost_container);
     outMostView.setBackgroundResource(backgroundResource);
-      headerContainer = (ViewGroup) view.findViewById(R.id.dialogplus_header_container);
-      footerContainer = (ViewGroup) view.findViewById(R.id.dialogplus_footer_container);
     listView = (ListView) view.findViewById(R.id.dialogplus_list);
     listView.setOnItemClickListener(this);
     listView.setOnKeyListener(new View.OnKeyListener() {

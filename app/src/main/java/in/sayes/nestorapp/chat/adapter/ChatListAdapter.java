@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import in.sayes.nestorapp.R;
 import in.sayes.nestorapp.chat.helper.MessageEntity;
-import in.sayes.nestorapp.chat.helper.Status;
 import in.sayes.nestorapp.chat.helper.UserType;
 
 /**
@@ -60,22 +59,23 @@ public class ChatListAdapter extends BaseAdapter {
 
         if (message.getUserType() == UserType.SELF) {
             if (convertView == null) {
-                v = LayoutInflater.from(context).inflate(R.layout.chat_row_user_combo, null, false);
+                v = LayoutInflater.from(context).inflate(R.layout.chat_row_user_text, null, false);
                 holder1 = new ViewHolder1();
 
 
-                /*holder1.messageTextView = (TextView) v.findViewById(R.id.message_text);
-                holder1.timeTextView = (TextView) v.findViewById(R.id.time_text);*/
+                holder1.messageTextView = (TextView) v.findViewById(R.id.message_text);
+                holder1.timeTextView = (TextView) v.findViewById(R.id.time_text);
 
                 v.setTag(holder1);
             } else {
                 v = convertView;
                 holder1 = (ViewHolder1) v.getTag();
-
             }
 
+            holder1.messageTextView.setText(message.getMsgText());
+            holder1.timeTextView.setText(SIMPLE_DATE_FORMAT.format(message.getMessageTime()));
 
-          //  holder1.timeTextView.setText(SIMPLE_DATE_FORMAT.format(message.getMessageTime()));
+
 
         } else if (message.getUserType() == UserType.NESTOR) {
 
@@ -98,12 +98,7 @@ public class ChatListAdapter extends BaseAdapter {
              holder2.messageTextView.setText(message.getMsgText());
              holder2.timeTextView.setText(SIMPLE_DATE_FORMAT.format(message.getMessageTime()));
 
-            if (message.getMsgStatus() == Status.DELIVERED) {
-                holder2.messageStatus.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_double_tick));
-            } else if (message.getMsgStatus() == Status.SENT) {
-                holder2.messageStatus.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_single_tick));
 
-            }
 
 
         }

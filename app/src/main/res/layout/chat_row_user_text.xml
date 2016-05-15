@@ -46,7 +46,7 @@
 
                 android:autoLink="web"
                 android:maxWidth="280dp"
-                android:text="I want to climb Everest  " />
+                android:text="" />
 
         </LinearLayout>
 

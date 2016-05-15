@@ -8,19 +8,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import in.sayes.android.customui.dialogplus.DialogPlus;
 import in.sayes.android.customui.dialogplus.GridHolder;
 import in.sayes.android.customui.dialogplus.Holder;
 import in.sayes.android.customui.dialogplus.ListHolder;
-import in.sayes.android.customui.dialogplus.OnBackPressListener;
 import in.sayes.android.customui.dialogplus.OnCancelListener;
 import in.sayes.android.customui.dialogplus.OnClickListener;
 import in.sayes.android.customui.dialogplus.OnDismissListener;
@@ -36,7 +35,7 @@ public class DialogMainActivity extends ActionBarActivity {
   private CheckBox headerCheckBox;
   private CheckBox footerCheckBox;
   private CheckBox expandedCheckBox;
-    private List<GSON_RootLevel.OptionType> options;
+    private List<GSON_RootLevel.OptionsEntity> mOptions;
 
     @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +46,15 @@ public class DialogMainActivity extends ActionBarActivity {
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     actionBar.setTitle(getString(R.string.app_name));
+        mOptions=new LinkedList<GSON_RootLevel.OptionsEntity>();
+for(int i=0 ;i<10;i++){
+    GSON_RootLevel.OptionsEntity option= new GSON_RootLevel.OptionsEntity();
+    option.setValue(i+"  cjahkjchkjahckjhak");
 
-       /* options.add("asada");
-        options.add("iruiowuioruw");
-        options.add("pposnada");
-        options.add("llsfertq");
-        options.add("qqqmmaa");
-        options.add("ggffsstt");*/
+    mOptions.add(option);
+}
+
+
 
     radioGroup = (RadioGroup) findViewById(R.id.radio_group);
     headerCheckBox = (CheckBox) findViewById(R.id.header_check_box);
@@ -99,7 +100,7 @@ public class DialogMainActivity extends ActionBarActivity {
       }
     });
 
-    View contentView = getLayoutInflater().inflate(R.layout.dialog_content2, null);
+  /*  View contentView = getLayoutInflater().inflate(R.layout.dialog_content2, null);
     DialogPlus dialogPlus = DialogPlus.newDialog(this)
         .setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"asdfa"}))
         .setCancelable(true)
@@ -123,10 +124,11 @@ public class DialogMainActivity extends ActionBarActivity {
         })
         .create();
 
-    dialogPlus.show();
+    dialogPlus.show();*/
   }
 
-  private void showDialog(int holderId, int gravity, boolean showHeader, boolean showFooter, boolean expanded) {
+  private void showDialog(int holderId, int gravity, boolean showHeader, boolean showFooter,
+                          boolean expanded) {
     boolean isGrid;
     Holder holder;
     switch (holderId) {
@@ -191,7 +193,8 @@ public class DialogMainActivity extends ActionBarActivity {
       }
     };
 
-    DialogSimpleAdapter adapter = new DialogSimpleAdapter(DialogMainActivity.this, isGrid,options);
+      String inputFromType="";
+      DialogSimpleAdapter adapter = new DialogSimpleAdapter(DialogMainActivity.this, isGrid,mOptions, inputFromType);
     if (showHeader && showFooter) {
       showCompleteDialog(holder, gravity, adapter, clickListener, itemClickListener, dismissListener, cancelListener,
           expanded);
@@ -229,6 +232,14 @@ public class DialogMainActivity extends ActionBarActivity {
           @Override public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
             Log.d("DialogPlus", "onItemClick() called with: " + "item = [" +
                 item + "], position = [" + position + "]");
+              dialog.dismiss();
+              showDialog(
+                      radioGroup.getCheckedRadioButtonId(),
+                      Gravity.BOTTOM,
+                      headerCheckBox.isChecked(),
+                      footerCheckBox.isChecked(),
+                      expandedCheckBox.isChecked()
+              );
           }
         })
         .setOnDismissListener(dismissListener)
@@ -311,4 +322,12 @@ public class DialogMainActivity extends ActionBarActivity {
         .create();
     dialog.show();
   }
+
+
+
+
+
+
+
+
 }

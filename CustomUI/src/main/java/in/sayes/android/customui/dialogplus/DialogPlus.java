@@ -362,7 +362,7 @@ public class DialogPlus {
     }
       //Not closing the dialog
 
-    //dismiss();
+    dismiss();
   }
 
   /**

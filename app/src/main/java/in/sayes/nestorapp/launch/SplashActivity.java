@@ -25,6 +25,8 @@ public class SplashActivity extends AppCompatActivity {
 
         appPreferences = new AppPreferences(this);
 
+
+
         startNextScreen();
     }
 

@@ -17,9 +17,9 @@ public class DialogSimpleAdapter extends BaseAdapter {
 
   private LayoutInflater layoutInflater;
   private boolean isGrid;
-    List<GSON_RootLevel.OptionType> mOptions;
+    List<GSON_RootLevel.OptionsEntity> mOptions;
 
-  public DialogSimpleAdapter(Context context, boolean isGrid,List<GSON_RootLevel.OptionType> options) {
+  public DialogSimpleAdapter(Context context, boolean isGrid, List<GSON_RootLevel.OptionsEntity> options, String inputFromType) {
     layoutInflater = LayoutInflater.from(context);
     this.isGrid = isGrid;
       this.mOptions=options;
@@ -62,7 +62,7 @@ public class DialogSimpleAdapter extends BaseAdapter {
 
 
 
-        viewHolder.textView.setText(mOptions.get(position).toString());
+        viewHolder.textView.setText(mOptions.get(position).getValue());
 
 
     return view;
